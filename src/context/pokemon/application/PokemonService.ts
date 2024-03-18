@@ -89,12 +89,16 @@ export default class PokemonService {
 
   async setFreeAPokemonById(pokemonId: number): Promise<void> {
     try {
-      return this.pokemonRepository.releasePokemonById(
-        new Id(pokemonId)
-      );
-    } 
-    catch(error: any) {
-      console.error('Error al realizar la operación:', error.message);
+      return this.pokemonRepository.releasePokemonById(new Id(pokemonId));
+    } catch (error: any) {
+      throw error;
+    }
+  }
+
+  async setFreeAPokemonByName(pokeName: string): Promise<void> {
+    try {
+      return this.pokemonRepository.releasePokemonByName(new Name(pokeName));
+    } catch (error: any) {
       throw error;
     }
   }

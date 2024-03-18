@@ -21,6 +21,7 @@ if (process.env.NODE_ENV === "development") {
   pokemonController = new PokemonController(pokemonService);
   app.post('/api/register/pokemon/:pokemon', pokemonController.savePokemonIntoDB.bind(pokemonController));
   app.delete('/api/release/pokemon/:id', pokemonController.releasePokemonById.bind(pokemonController));
+  app.delete('/api/release/pokemon/:pokemon', pokemonController.releasePokemonByName.bind(pokemonController));
 }
 
 app.listen(port, () => {
