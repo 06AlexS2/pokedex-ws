@@ -1,6 +1,7 @@
 import PokemonRepository from "../../PokemonRepository";
 import { PrismaClient } from "@prisma/client";
 import Pokemon from "../../../domain/Pokemon";
+import Id from "../../../domain/value_objects/general/Id";
 
 const prisma = new PrismaClient();
 
@@ -113,7 +114,7 @@ const prisma = new PrismaClient();
 // }
 
 export default class SQLiteRepository implements PokemonRepository {
-  async catchPokemonIntoDB(pokemon: Pokemon): Promise<void> {
+  async catchPokemonIntoDB(pokemon: Pokemon): Promise<Pokemon> {
     //then the moves
     //then the pokemon_types
     //then the pokemon_moves
@@ -241,5 +242,37 @@ export default class SQLiteRepository implements PokemonRepository {
         });
       }
     }
+    return Promise.resolve(pokemon);
+  }
+
+  async releasePokemonById(id: Id): Promise<void> {
+    //first check if the pokemon even exists in the records
+    const pokemonExists = await prisma.pokemon.findFirst({
+      where: {
+        id: id.getValue(),
+      },
+    });
+    if(!pokemonExists){
+      return Promise.reject(new Error("Pokemon not found."));
+    }
+    //then remove the pokemon_moves
+    await prisma.pokemon_moves.deleteMany({
+      where: {
+        pokemon_id: id.getValue(),
+      },
+    });
+    //then remove the pokemon_types
+    await prisma.pokemon_types.deleteMany({
+      where: {
+        pokemon_id: id.getValue(),
+      },
+    });
+    //then remove the pokemon
+    await prisma.pokemon.delete({
+      where: {
+        id: id.getValue(),
+      },
+    });
+    return Promise.resolve();
   }
 }
