@@ -30,6 +30,10 @@ if (process.env.NODE_ENV === "development") {
     "/api/set-free/pokemon-name/:pokemon",
     pokemonController.releasePokemonByName.bind(pokemonController)
   );
+  app.delete(
+    "/api/set-free/pokemon-type/:type",
+    pokemonController.releaseManyPokemonByType.bind(pokemonController)
+  );
   app.get(
     "/api/v1/pokedex",
     pokemonController.obtainPokedex.bind(pokemonController)
