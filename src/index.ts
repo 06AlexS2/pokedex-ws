@@ -1,9 +1,9 @@
 // src/index.js
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
-import SQLiteRepository from "./context/pokemon-get/infrastructure/persistence/SQLite/DBRepository";
-import PokemonService from "./context/pokemon-get/application/PokemonService";
-import PokemonController from "./context/pokemon-get/infrastructure/express/PokemonController";
+import SQLiteRepository from "./context/pokemon/infrastructure/persistence/SQLite/DBRepository";
+import PokemonService from "./context/pokemon/application/PokemonService";
+import PokemonController from "./context/pokemon/infrastructure/express/PokemonController";
 
 dotenv.config();
 
@@ -20,6 +20,7 @@ if (process.env.NODE_ENV === "development") {
   const pokemonService = new PokemonService(SQLitePokemonRepository);
   pokemonController = new PokemonController(pokemonService);
   app.post('/api/register/pokemon/:pokemon', pokemonController.savePokemonIntoDB.bind(pokemonController));
+  app.delete('/api/release/pokemon/:id', pokemonController.releasePokemonById.bind(pokemonController));
 }
 
 app.listen(port, () => {

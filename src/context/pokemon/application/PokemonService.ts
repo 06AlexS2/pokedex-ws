@@ -22,7 +22,7 @@ export default class PokemonService {
       `https://pokeapi.co/api/v2/pokemon/${pokeName}`
     );
     //validate if the request dont throw an error
-    if(response.status !== 200) {
+    if (response.status !== 200) {
       return Promise.reject("Not a valid pokemon");
     }
     const pokemonData = await response.json();
@@ -44,7 +44,7 @@ export default class PokemonService {
       const move = pokemonData.moves[i];
       const moveInfo = await fetch(move.move.url);
       if (!moveInfo) {
-      return Promise.reject("Error fetching the move info");
+        return Promise.reject("Error fetching the move info");
       }
       const moveData = await moveInfo.json(); // Extract JSON data from the response
       const moveId = new Id(moveData.id); // Access the 'id' property from the moveData
@@ -53,38 +53,49 @@ export default class PokemonService {
       const movePP = new MovePP(moveData.pp);
       const movePriority = new MovePriority(moveData.priority);
       const moveTypeId = new Id(
-      Number.parseInt(moveData.type.url.split("/")[6])
+        Number.parseInt(moveData.type.url.split("/")[6])
       );
       const moveTypeName = new Name(moveData.type.name);
       if (!moveTypeId || !moveTypeName) {
-      return Promise.reject("Error fetching the movement types");
+        return Promise.reject("Error fetching the movement types");
       }
       const moveElementType = new PokemonType(moveTypeName, moveTypeId);
       const moveAccuracy = new MoveAccuracy(moveData.accuracy);
       const moveEffect = new MoveEffect(
-      new EffectChance(moveData.effect_chance),
-      new ShortEffect(moveData.effect_entries[0].short_effect)
+        new EffectChance(moveData.effect_chance),
+        new ShortEffect(moveData.effect_entries[0].short_effect)
       );
       const moveDamageClass = new MoveDamageClass(
-      new Name(moveData.damage_class.name),
-      new Id(Number.parseInt(moveData.damage_class.url.split("/")[6]))
+        new Name(moveData.damage_class.name),
+        new Id(Number.parseInt(moveData.damage_class.url.split("/")[6]))
       );
       moves.push(
-      new PokemonMove(
-        moveName,
-        moveId,
-        movePower,
-        movePP,
-        movePriority,
-        moveElementType,
-        moveAccuracy,
-        moveEffect,
-        moveDamageClass
-      )
+        new PokemonMove(
+          moveName,
+          moveId,
+          movePower,
+          movePP,
+          movePriority,
+          moveElementType,
+          moveAccuracy,
+          moveEffect,
+          moveDamageClass
+        )
       );
     }
     const pokemon = new Pokemon(id, name, types, moves);
-    await this.pokemonRepository.catchPokemonIntoDB(pokemon);
-    return Promise.resolve(pokemon);
+    return this.pokemonRepository.catchPokemonIntoDB(pokemon);
+  }
+
+  async setFreeAPokemonById(pokemonId: number): Promise<void> {
+    try {
+      return this.pokemonRepository.releasePokemonById(
+        new Id(pokemonId)
+      );
+    } 
+    catch(error: any) {
+      console.error('Error al realizar la operación:', error.message);
+      throw error;
+    }
   }
 }
