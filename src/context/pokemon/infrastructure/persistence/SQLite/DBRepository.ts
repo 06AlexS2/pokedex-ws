@@ -3,6 +3,16 @@ import { PrismaClient } from "@prisma/client";
 import Pokemon from "../../../domain/Pokemon";
 import Id from "../../../domain/value_objects/general/Id";
 import Name from "../../../domain/value_objects/general/Name";
+import PokemonType from "../../../domain/PokemonType";
+import PokemonMove from "../../../domain/PokemonMove";
+import MoveEffect from "../../../domain/PokemonMoveEffect";
+import EffectChance from "../../../domain/value_objects/EffectChance";
+import ShortEffect from "../../../domain/value_objects/ShortEffect";
+import MovePower from "../../../domain/value_objects/MovePower";
+import MovePP from "../../../domain/value_objects/MovePP";
+import MovePriority from "../../../domain/value_objects/MovePriority";
+import MoveAccuracy from "../../../domain/value_objects/MoveAccuracy";
+import MoveDamageClass from "../../../domain/MoveDamageClass";
 
 const prisma = new PrismaClient();
 
@@ -308,5 +318,85 @@ export default class SQLiteRepository implements PokemonRepository {
       },
     });
     return Promise.resolve();
+  }
+
+  async getAllPokedexEntries(): Promise<Pokemon[]> {
+    const pokedex = await prisma.pokemon.findMany();
+
+    if (!pokedex) {
+      return Promise.reject(new Error("No pokemon entries."));
+    }
+
+    //here
+    const pokemonList: Pokemon[] = [];
+    for (const pokemon of pokedex) {
+      const types = await prisma.pokemon_types.findMany({
+        where: { pokemon_id: pokemon.id },
+      });
+      const moves = await prisma.pokemon_moves.findMany({
+        where: { pokemon_id: pokemon.id },
+      });
+      const pokemonTypes: PokemonType[] = [];
+      const pokemonMoves: PokemonMove[] = [];
+
+      for (const type of types) {
+        const elementType = await prisma.element_types.findUnique({
+          where: { id: type.type_id },
+        });
+        if (elementType) {
+          const pokemonType = new PokemonType(
+            new Name(elementType.name),
+            new Id(elementType.id),
+          );
+          pokemonTypes.push(pokemonType);
+        }
+      }
+
+      for (const move of moves) {
+        const moveData = await prisma.moves.findUnique({
+          where: { id: move.move_id },
+        });
+        if (moveData) {
+          const moveElementType = await prisma.element_types.findUnique({
+            where: { id: moveData.type_id },
+          });
+          const damageClass = await prisma.damage_classes.findUnique({
+            where: { id: moveData.damage_class_id },
+          });
+          const effect = new MoveEffect(
+            new EffectChance(moveData.chance),
+            new ShortEffect(moveData.short_effect)
+          );
+          const moveObj = new PokemonMove(
+            new Name(moveData.name),
+            new Id(moveData.id),
+            new MovePower(moveData.power),
+            new MovePP(moveData.pp),
+            new MovePriority(moveData.priority),
+            new PokemonType(
+              new Name(moveElementType?.name || ""),
+              new Id(moveElementType?.id || 0)
+            ),
+            new MoveAccuracy(moveData.accuracy),
+            effect,
+            new MoveDamageClass(
+              new Name(damageClass?.name || ""),
+              new Id(damageClass?.id || 0),
+                )
+          );
+          pokemonMoves.push(moveObj);
+        }
+      }
+
+      const pokemonObj = new Pokemon(
+        new Id(pokemon.id),
+        new Name(pokemon.name),
+        pokemonTypes,
+        pokemonMoves
+      );
+      pokemonList.push(pokemonObj);
+    }
+
+    return Promise.resolve(pokemonList);
   }
 }
