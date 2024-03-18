@@ -2,6 +2,7 @@ import PokemonRepository from "../../PokemonRepository";
 import { PrismaClient } from "@prisma/client";
 import Pokemon from "../../../domain/Pokemon";
 import Id from "../../../domain/value_objects/general/Id";
+import Name from "../../../domain/value_objects/general/Name";
 
 const prisma = new PrismaClient();
 
@@ -183,14 +184,14 @@ export default class SQLiteRepository implements PokemonRepository {
     }
 
     //then insert the moves
-    for(let move of pokemon.getMoves()){
+    for (let move of pokemon.getMoves()) {
       //first validate if the move exists
       const moveExists = await prisma.moves.findFirst({
         where: {
           id: move.getId().getValue(),
         },
       });
-      if(!moveExists){
+      if (!moveExists) {
         await prisma.moves.create({
           data: {
             id: move.getId().getValue(),
@@ -252,7 +253,7 @@ export default class SQLiteRepository implements PokemonRepository {
         id: id.getValue(),
       },
     });
-    if(!pokemonExists){
+    if (!pokemonExists) {
       return Promise.reject(new Error("Pokemon not found."));
     }
     //then remove the pokemon_moves
@@ -271,6 +272,39 @@ export default class SQLiteRepository implements PokemonRepository {
     await prisma.pokemon.delete({
       where: {
         id: id.getValue(),
+      },
+    });
+    return Promise.resolve();
+  }
+
+  async releasePokemonByName(name: Name): Promise<void> {
+    //first check if the pokemon even exists in the records
+    const pokemonExists = await prisma.pokemon.findFirst({
+      where: {
+        name: name.getValue(),
+      },
+    });
+    if (!pokemonExists) {
+      return Promise.reject(new Error("Pokemon not found."));
+    }
+    //then remove the pokemon_moves
+    await prisma.pokemon_moves.deleteMany({
+      where: {
+        pokemon_id: pokemonExists.id,
+      },
+    });
+
+    //then remove the pokemon_types
+    await prisma.pokemon_types.deleteMany({
+      where: {
+        pokemon_id: pokemonExists.id,
+      },
+    });
+
+    //then remove the pokemon
+    await prisma.pokemon.delete({
+      where: {
+        id: pokemonExists.id,
       },
     });
     return Promise.resolve();

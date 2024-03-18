@@ -5,4 +5,5 @@ import Name from "../domain/value_objects/general/Name";
 export default interface PokemonRepository {
     catchPokemonIntoDB(pokemon: Pokemon): Promise<Pokemon>;
     releasePokemonById(id: Id): Promise<void>;
+    releasePokemonByName(name: Name): Promise<void>;
 }

@@ -16,10 +16,20 @@ export default class PokemonController {
     const { id } = req.params;
     const parsedId: number = parseInt(id, 10);
     try {
-        await this.pokemonService.setFreeAPokemonById(parsedId);
-        res.status(204).send({message: "pokemon deleted successfully."});
+      await this.pokemonService.setFreeAPokemonById(parsedId);
+      res.status(204).send({ message: "pokemon deleted successfully." });
     } catch (error: any) {
-        res.status(404).json({message: error.message})
+      res.status(404).json({ message: error.message });
+    }
+  }
+
+  async releasePokemonByName(req: Request, res: Response) {
+    const { pokemon } = req.params;
+    try {
+      await this.pokemonService.setFreeAPokemonByName(pokemon);
+      res.status(204).send({ message: "pokemon deleted successfully." });
+    } catch (error: any) {
+      res.status(404).json({ message: error.message });
     }
   }
 }
