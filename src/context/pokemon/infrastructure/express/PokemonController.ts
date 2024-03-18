@@ -32,4 +32,19 @@ export default class PokemonController {
       res.status(404).json({ message: error.message });
     }
   }
+
+  async obtainPokedex(req: Request, res: Response) {
+    try {
+      const fetchedPokemon: Pokemon[] = await this.pokemonService.showPokedex();
+      const pokedex: any[] = [];
+      for (const pokemon of fetchedPokemon) {
+        pokedex.push(pokemon.toPrimitive());
+      }
+      res.status(200).json(pokedex);
+
+      res.status(204).json()
+    } catch (error) {
+      
+    }
+  }
 }

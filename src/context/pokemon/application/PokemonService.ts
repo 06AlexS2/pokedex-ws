@@ -102,4 +102,12 @@ export default class PokemonService {
       throw error;
     }
   }
+
+  async showPokedex(): Promise<Pokemon[]>{
+    try {
+      return this.pokemonRepository.getAllPokedexEntries();
+    } catch (error: any) {
+      throw error;
+    }
+  }
 }
