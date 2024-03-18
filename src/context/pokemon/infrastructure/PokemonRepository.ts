@@ -7,4 +7,5 @@ export default interface PokemonRepository {
     releasePokemonById(id: Id): Promise<void>;
     releasePokemonByName(name: Name): Promise<void>;
     getAllPokedexEntries(): Promise<Pokemon[]>;
+    releaseManyPokemonByType(type: Name): Promise<void>;
 }

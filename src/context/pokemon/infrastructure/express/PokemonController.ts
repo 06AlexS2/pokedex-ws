@@ -47,4 +47,14 @@ export default class PokemonController {
       
     }
   }
+
+  async releaseManyPokemonByType(req: Request, res: Response) {
+    const {type} = req.params;
+    try {
+      await this.pokemonService.setFreeManyPokemonByType(type);
+      res.status(204).send({ message: "pokemon deleted successfully." });
+    } catch (error: any) {
+      res.status(404).json({ message: error.message });
+    }
+  }
 }

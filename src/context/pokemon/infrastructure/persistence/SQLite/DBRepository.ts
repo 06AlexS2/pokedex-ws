@@ -346,7 +346,7 @@ export default class SQLiteRepository implements PokemonRepository {
         if (elementType) {
           const pokemonType = new PokemonType(
             new Name(elementType.name),
-            new Id(elementType.id),
+            new Id(elementType.id)
           );
           pokemonTypes.push(pokemonType);
         }
@@ -381,8 +381,8 @@ export default class SQLiteRepository implements PokemonRepository {
             effect,
             new MoveDamageClass(
               new Name(damageClass?.name || ""),
-              new Id(damageClass?.id || 0),
-                )
+              new Id(damageClass?.id || 0)
+            )
           );
           pokemonMoves.push(moveObj);
         }
@@ -398,5 +398,47 @@ export default class SQLiteRepository implements PokemonRepository {
     }
 
     return Promise.resolve(pokemonList);
+  }
+
+  async releaseManyPokemonByType(type: Name): Promise<void> {
+    //first check if type exists in db records
+    const typeExists = await prisma.element_types.findFirst({
+      where: {
+        name: type.getValue(),
+      },
+    });
+    if (!typeExists) {
+      return Promise.reject(new Error("Pokemon Type not found."));
+    }
+    //if it exists, get all the pokemon that has it
+    const pokemonByType = await prisma.pokemon_types.findMany({
+      where: {
+        type_id: typeExists.id,
+      },
+    });
+    if (!pokemonByType) {
+      return Promise.reject(new Error("Pokemon not found."));
+    }
+    for (let pokemon of pokemonByType) {
+      //then, with that, first delete the pokemon_moves
+      await prisma.pokemon_moves.deleteMany({
+        where: {
+          pokemon_id: pokemon.pokemon_id,
+        },
+      });
+      //then, delete the pokemon_types
+      await prisma.pokemon_types.deleteMany({
+        where: {
+          pokemon_id: pokemon.pokemon_id,
+        },
+      });
+      //finally, delete the pokemon
+      await prisma.pokemon.delete({
+        where: {
+          id: pokemon.pokemon_id,
+        },
+      });
+    }
+    return Promise.resolve();
   }
 }

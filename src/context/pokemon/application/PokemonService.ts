@@ -103,9 +103,19 @@ export default class PokemonService {
     }
   }
 
-  async showPokedex(): Promise<Pokemon[]>{
+  async showPokedex(): Promise<Pokemon[]> {
     try {
       return this.pokemonRepository.getAllPokedexEntries();
+    } catch (error: any) {
+      throw error;
+    }
+  }
+
+  async setFreeManyPokemonByType(pokemonType: string): Promise<void> {
+    try {
+      return this.pokemonRepository.releaseManyPokemonByType(
+        new Name(pokemonType)
+      );
     } catch (error: any) {
       throw error;
     }
