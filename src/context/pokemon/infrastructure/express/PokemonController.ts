@@ -7,9 +7,13 @@ export default class PokemonController {
 
   async savePokemonIntoDB(req: Request, res: Response) {
     const { pokemon } = req.params;
-    const fetchedPokemon: Pokemon =
-      await this.pokemonService.fetchPokemonFromAPI(pokemon);
-    res.status(201).json(fetchedPokemon.toPrimitive());
+    try {
+      const fetchedPokemon: Pokemon =
+        await this.pokemonService.fetchPokemonFromAPI(pokemon);
+      res.status(201).json(fetchedPokemon.toPrimitive());
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+    }
   }
 
   async releasePokemonById(req: Request, res: Response) {
@@ -41,15 +45,13 @@ export default class PokemonController {
         pokedex.push(pokemon.toPrimitive());
       }
       res.status(200).json(pokedex);
-
-      res.status(204).json()
-    } catch (error) {
-      
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
     }
   }
 
   async releaseManyPokemonByType(req: Request, res: Response) {
-    const {type} = req.params;
+    const { type } = req.params;
     try {
       await this.pokemonService.setFreeManyPokemonByType(type);
       res.status(204).send({ message: "pokemon deleted successfully." });

@@ -9,4 +9,8 @@ const errorController = (
 ) => {
   return res.status(err.code).json({ code: err.code, error: err.message });
 };
-module.exports(errorController);
+
+const dbError = (err: customError) => {
+  return Promise.reject(new Error(customError.name));
+};
+module.exports(errorController, dbError);
