@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = "linux-musl-arm64-openssl-3.0.x"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DEV_DATABASE_URL")
+}
+
+model pokemon {
+  id Int @unique
+  name String
+  types pokemon_types[]
+  moves pokemon_moves[]
+}
+
+model element_types {
+  id Int @unique
+  name String
+  pokemon_types pokemon_types[]
+  moves moves[]
+}
+
+model pokemon_types {
+  id Int @id @default(autoincrement())
+  pokemon_id Int
+  type_id Int
+  pokemon pokemon @relation(fields: [pokemon_id], references: [id])
+  type element_types @relation(fields: [type_id], references: [id])
+}
+
+model damage_classes {
+  id Int @unique
+  name String
+  moves moves[]
+}
+
+model moves {
+  id Int @unique
+  name String
+  power Int @default(0)
+  pp Int @default(0)
+  priority Int @default(0)
+  type_id Int
+  accuracy Int @default(0)
+  chance Int @default(0)
+  short_effect String @default("")
+  damage_class_id Int
+  pokemon_moves pokemon_moves[]
+  type element_types @relation(fields: [type_id], references: [id])
+  damage_class damage_classes @relation(fields: [damage_class_id], references: [id])
+}
+
+model pokemon_moves {
+  id Int @id @default(autoincrement())
+  pokemon_id Int
+  move_id Int
+  moves moves @relation(fields: [move_id], references: [id])
+  pokemon pokemon @relation(fields: [pokemon_id], references: [id])
+}
