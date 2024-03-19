@@ -1,0 +1,19 @@
+d407bed25a70285d15d773ba307423f9
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+class PokemonType {
+    constructor(name, id) {
+        this.name = name;
+        this.id = id;
+        this.name = name;
+        this.id = id;
+    }
+    getName() {
+        return this.name;
+    }
+    getId() {
+        return this.id;
+    }
+}
+exports.default = PokemonType;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL2FsZXhzMi9kZXZlbG9wL3Bva2VhcGktd3Mvc3JjL2NvbnRleHQvcG9rZW1vbi9kb21haW4vUG9rZW1vblR5cGUudHMiLCJtYXBwaW5ncyI6Ijs7QUFHQSxNQUFxQixXQUFXO0lBQzlCLFlBQW9CLElBQVUsRUFBVSxFQUFNO1FBQTFCLFNBQUksR0FBSixJQUFJLENBQU07UUFBVSxPQUFFLEdBQUYsRUFBRSxDQUFJO1FBQzVDLElBQUksQ0FBQyxJQUFJLEdBQUcsSUFBSSxDQUFDO1FBQ2pCLElBQUksQ0FBQyxFQUFFLEdBQUcsRUFBRSxDQUFDO0lBQ2YsQ0FBQztJQUVNLE9BQU87UUFDWixPQUFPLElBQUksQ0FBQyxJQUFJLENBQUM7SUFDbkIsQ0FBQztJQUVNLEtBQUs7UUFDVixPQUFPLElBQUksQ0FBQyxFQUFFLENBQUM7SUFDakIsQ0FBQztDQUNGO0FBYkQsOEJBYUMiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL2FsZXhzMi9kZXZlbG9wL3Bva2VhcGktd3Mvc3JjL2NvbnRleHQvcG9rZW1vbi9kb21haW4vUG9rZW1vblR5cGUudHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IElkIGZyb20gXCIuL3ZhbHVlX29iamVjdHMvZ2VuZXJhbC9JZFwiO1xuaW1wb3J0IE5hbWUgZnJvbSBcIi4vdmFsdWVfb2JqZWN0cy9nZW5lcmFsL05hbWVcIjtcblxuZXhwb3J0IGRlZmF1bHQgY2xhc3MgUG9rZW1vblR5cGUge1xuICBjb25zdHJ1Y3Rvcihwcml2YXRlIG5hbWU6IE5hbWUsIHByaXZhdGUgaWQ6IElkKSB7XG4gICAgdGhpcy5uYW1lID0gbmFtZTtcbiAgICB0aGlzLmlkID0gaWQ7XG4gIH1cblxuICBwdWJsaWMgZ2V0TmFtZSgpOiBOYW1lIHtcbiAgICByZXR1cm4gdGhpcy5uYW1lO1xuICB9XG5cbiAgcHVibGljIGdldElkKCk6IElkIHtcbiAgICByZXR1cm4gdGhpcy5pZDtcbiAgfVxufVxuIl0sInZlcnNpb24iOjN9

@@ -23,15 +23,15 @@ if (process.env.NODE_ENV === "development") {
     pokemonController.savePokemonIntoDB.bind(pokemonController)
   );
   app.delete(
-    "/api/set-free/pokemon-id/:id",
+    "/api/v1/set-free/pokemon-id/:id",
     pokemonController.releasePokemonById.bind(pokemonController)
   );
   app.delete(
-    "/api/set-free/pokemon-name/:pokemon",
+    "/api/v1/set-free/pokemon-name/:pokemon",
     pokemonController.releasePokemonByName.bind(pokemonController)
   );
   app.delete(
-    "/api/set-free/pokemon-type/:type",
+    "/api/v1/set-free/pokemon-type/:type",
     pokemonController.releaseManyPokemonByType.bind(pokemonController)
   );
   app.get(

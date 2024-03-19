@@ -1,0 +1,11 @@
+d18c81a2a3b156cd41559b95dd419173
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const NumberValueObject_1 = __importDefault(require("../../../shared/domain/value_objects/NumberValueObject"));
+class MovePower extends NumberValueObject_1.default {
+}
+exports.default = MovePower;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL2FsZXhzMi9kZXZlbG9wL3Bva2VhcGktd3Mvc3JjL2NvbnRleHQvcG9rZW1vbi9kb21haW4vdmFsdWVfb2JqZWN0cy9Nb3ZlUG93ZXIudHMiLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQSwrR0FBdUY7QUFFdkYsTUFBcUIsU0FBVSxTQUFRLDJCQUFpQjtDQUFHO0FBQTNELDRCQUEyRCIsIm5hbWVzIjpbXSwic291cmNlcyI6WyIvVXNlcnMvYWxleHMyL2RldmVsb3AvcG9rZWFwaS13cy9zcmMvY29udGV4dC9wb2tlbW9uL2RvbWFpbi92YWx1ZV9vYmplY3RzL01vdmVQb3dlci50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgTnVtYmVyVmFsdWVPYmplY3QgZnJvbSBcIi4uLy4uLy4uL3NoYXJlZC9kb21haW4vdmFsdWVfb2JqZWN0cy9OdW1iZXJWYWx1ZU9iamVjdFwiO1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBNb3ZlUG93ZXIgZXh0ZW5kcyBOdW1iZXJWYWx1ZU9iamVjdCB7fSJdLCJ2ZXJzaW9uIjozfQ==
