@@ -1,0 +1,11 @@
+bda95f65037f291744c49478f6a8f94d
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const NumberValueObject_1 = __importDefault(require("../../../../shared/domain/value_objects/NumberValueObject"));
+class Id extends NumberValueObject_1.default {
+}
+exports.default = Id;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL2FsZXhzMi9kZXZlbG9wL3Bva2VhcGktd3Mvc3JjL2NvbnRleHQvcG9rZW1vbi9kb21haW4vdmFsdWVfb2JqZWN0cy9nZW5lcmFsL0lkLnRzIiwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsa0hBQTBGO0FBRTFGLE1BQXFCLEVBQUcsU0FBUSwyQkFBaUI7Q0FBRztBQUFwRCxxQkFBb0QiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL2FsZXhzMi9kZXZlbG9wL3Bva2VhcGktd3Mvc3JjL2NvbnRleHQvcG9rZW1vbi9kb21haW4vdmFsdWVfb2JqZWN0cy9nZW5lcmFsL0lkLnRzIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBOdW1iZXJWYWx1ZU9iamVjdCBmcm9tIFwiLi4vLi4vLi4vLi4vc2hhcmVkL2RvbWFpbi92YWx1ZV9vYmplY3RzL051bWJlclZhbHVlT2JqZWN0XCI7XG5cbmV4cG9ydCBkZWZhdWx0IGNsYXNzIElkIGV4dGVuZHMgTnVtYmVyVmFsdWVPYmplY3Qge30iXSwidmVyc2lvbiI6M30=

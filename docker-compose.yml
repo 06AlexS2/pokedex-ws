@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  express:
+    container_name: pokemon-ws
+    build: .
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./src:/opt/app/src
+      - ./package.json:/opt/package.json
+      - ./.env:/opt/app/.env
+    environment:
+      - NODE_ENV=production
+    # Aquí montamos el archivo .env como una variable de entorno
+    env_file:
+      - .env
+  tests:
+    build: .
+    command: npm run test
+    volumes:
+      - ./src:/opt/app/src
+      - ./package.json:/opt/package.json
+      - ./.env:/opt/app/.env
+    environment:
+      - NODE_ENV=development
+    env_file:
+      - .env

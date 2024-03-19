@@ -1,0 +1,11 @@
+14427b1c6cb9cfe09fb7ddf8c6195045
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const StringValueObject_1 = __importDefault(require("../../../../shared/domain/value_objects/StringValueObject"));
+class Name extends StringValueObject_1.default {
+}
+exports.default = Name;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL2FsZXhzMi9kZXZlbG9wL3Bva2VhcGktd3Mvc3JjL2NvbnRleHQvcG9rZW1vbi9kb21haW4vdmFsdWVfb2JqZWN0cy9nZW5lcmFsL05hbWUudHMiLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQSxrSEFBMEY7QUFFMUYsTUFBcUIsSUFBSyxTQUFRLDJCQUFpQjtDQUFHO0FBQXRELHVCQUFzRCIsIm5hbWVzIjpbXSwic291cmNlcyI6WyIvVXNlcnMvYWxleHMyL2RldmVsb3AvcG9rZWFwaS13cy9zcmMvY29udGV4dC9wb2tlbW9uL2RvbWFpbi92YWx1ZV9vYmplY3RzL2dlbmVyYWwvTmFtZS50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgU3RyaW5nVmFsdWVPYmplY3QgZnJvbSBcIi4uLy4uLy4uLy4uL3NoYXJlZC9kb21haW4vdmFsdWVfb2JqZWN0cy9TdHJpbmdWYWx1ZU9iamVjdFwiO1xuXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBOYW1lIGV4dGVuZHMgU3RyaW5nVmFsdWVPYmplY3Qge30iXSwidmVyc2lvbiI6M30=

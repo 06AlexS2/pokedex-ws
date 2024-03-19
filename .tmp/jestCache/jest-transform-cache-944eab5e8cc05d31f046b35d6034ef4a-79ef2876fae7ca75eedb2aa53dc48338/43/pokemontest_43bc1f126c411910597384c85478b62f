@@ -1,0 +1,31 @@
+0c5307a1d56b309cc792cb0cd1bc40fc
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const supertest_1 = __importDefault(require("supertest"));
+const src_1 = require("../../../src");
+describe("POST /api/v1/catch/pokemon-name/:pokemon", () => {
+    it("responds with a JSON containing the info from a pokemon", () => __awaiter(void 0, void 0, void 0, function* () {
+        const pokemonName = "eevee";
+        const response = yield (0, supertest_1.default)(src_1.app).post(`/api/v1/catch/pokemon-name/${pokemonName}`);
+        expect(response.status).toBe(201);
+        expect(response.body).toHaveProperty("moves");
+    }));
+    it("responds with a 400 when the pokemon is already registered", () => __awaiter(void 0, void 0, void 0, function* () {
+        const nonExistentPokemonName = 'eevee';
+        const response = yield (0, supertest_1.default)(src_1.app).post(`/api/v1/catch/pokemon-name/${nonExistentPokemonName}`);
+        expect(response.status).toBe(400);
+    }));
+});
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJmaWxlIjoiL1VzZXJzL2FsZXhzMi9kZXZlbG9wL3Bva2VhcGktd3MvdGVzdHMvY29udGV4dC9wb2tlbW9uL3Bva2Vtb24udGVzdC50cyIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7OztBQUFBLDBEQUFnQztBQUNoQyxzQ0FBbUM7QUFFbkMsUUFBUSxDQUFDLDBDQUEwQyxFQUFFLEdBQUcsRUFBRTtJQUN4RCxFQUFFLENBQUMseURBQXlELEVBQUUsR0FBUyxFQUFFO1FBQ3ZFLE1BQU0sV0FBVyxHQUFHLE9BQU8sQ0FBQTtRQUMzQixNQUFNLFFBQVEsR0FBRyxNQUFNLElBQUEsbUJBQU8sRUFBQyxTQUFHLENBQUMsQ0FBQyxJQUFJLENBQ3RDLDhCQUE4QixXQUFXLEVBQUUsQ0FDNUMsQ0FBQztRQUNGLE1BQU0sQ0FBQyxRQUFRLENBQUMsTUFBTSxDQUFDLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO1FBQ2xDLE1BQU0sQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLENBQUMsY0FBYyxDQUFDLE9BQU8sQ0FBQyxDQUFDO0lBQ2hELENBQUMsQ0FBQSxDQUFDLENBQUM7SUFFSCxFQUFFLENBQUMsNERBQTRELEVBQUUsR0FBUyxFQUFFO1FBQzFFLE1BQU0sc0JBQXNCLEdBQUcsT0FBTyxDQUFDO1FBQ3ZDLE1BQU0sUUFBUSxHQUFHLE1BQU0sSUFBQSxtQkFBTyxFQUFDLFNBQUcsQ0FBQyxDQUFDLElBQUksQ0FDcEMsOEJBQThCLHNCQUFzQixFQUFFLENBQ3ZELENBQUM7UUFDSixNQUFNLENBQUMsUUFBUSxDQUFDLE1BQU0sQ0FBQyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUNwQyxDQUFDLENBQUEsQ0FBQyxDQUFBO0FBQ0osQ0FBQyxDQUFDLENBQUMiLCJuYW1lcyI6W10sInNvdXJjZXMiOlsiL1VzZXJzL2FsZXhzMi9kZXZlbG9wL3Bva2VhcGktd3MvdGVzdHMvY29udGV4dC9wb2tlbW9uL3Bva2Vtb24udGVzdC50cyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgcmVxdWVzdCBmcm9tIFwic3VwZXJ0ZXN0XCI7XG5pbXBvcnQgeyBhcHAgfSBmcm9tIFwiLi4vLi4vLi4vc3JjXCI7XG5cbmRlc2NyaWJlKFwiUE9TVCAvYXBpL3YxL2NhdGNoL3Bva2Vtb24tbmFtZS86cG9rZW1vblwiLCAoKSA9PiB7XG4gIGl0KFwicmVzcG9uZHMgd2l0aCBhIEpTT04gY29udGFpbmluZyB0aGUgaW5mbyBmcm9tIGEgcG9rZW1vblwiLCBhc3luYyAoKSA9PiB7XG4gICAgY29uc3QgcG9rZW1vbk5hbWUgPSBcImVldmVlXCJcbiAgICBjb25zdCByZXNwb25zZSA9IGF3YWl0IHJlcXVlc3QoYXBwKS5wb3N0KFxuICAgICAgYC9hcGkvdjEvY2F0Y2gvcG9rZW1vbi1uYW1lLyR7cG9rZW1vbk5hbWV9YFxuICAgICk7XG4gICAgZXhwZWN0KHJlc3BvbnNlLnN0YXR1cykudG9CZSgyMDEpO1xuICAgIGV4cGVjdChyZXNwb25zZS5ib2R5KS50b0hhdmVQcm9wZXJ0eShcIm1vdmVzXCIpO1xuICB9KTtcblxuICBpdChcInJlc3BvbmRzIHdpdGggYSA0MDAgd2hlbiB0aGUgcG9rZW1vbiBpcyBhbHJlYWR5IHJlZ2lzdGVyZWRcIiwgYXN5bmMgKCkgPT4ge1xuICAgIGNvbnN0IG5vbkV4aXN0ZW50UG9rZW1vbk5hbWUgPSAnZWV2ZWUnO1xuICAgIGNvbnN0IHJlc3BvbnNlID0gYXdhaXQgcmVxdWVzdChhcHApLnBvc3QoXG4gICAgICAgIGAvYXBpL3YxL2NhdGNoL3Bva2Vtb24tbmFtZS8ke25vbkV4aXN0ZW50UG9rZW1vbk5hbWV9YFxuICAgICAgKTtcbiAgICBleHBlY3QocmVzcG9uc2Uuc3RhdHVzKS50b0JlKDQwMCk7XG4gIH0pXG59KTtcbiJdLCJ2ZXJzaW9uIjozfQ==
