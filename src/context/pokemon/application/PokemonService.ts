@@ -12,13 +12,16 @@ import MovePriority from "../domain/value_objects/MovePriority";
 import ShortEffect from "../domain/value_objects/ShortEffect";
 import MoveEffect from "../domain/PokemonMoveEffect";
 import MoveDamageClass from "../domain/MoveDamageClass";
+import NodeFetchCache, { MemoryCache } from 'node-fetch-cache';
+
+const cacheFetch = NodeFetchCache.create({cache: new MemoryCache({ttl: 60000})})
 
 export default class PokemonService {
   //methods that will use the repository to get the data
   constructor(private pokemonRepository: PokemonRepository) {}
 
   async fetchPokemonFromAPI(pokeName: string): Promise<Pokemon> {
-    const response = await fetch(
+    const response = await cacheFetch(
       `https://pokeapi.co/api/v2/pokemon/${pokeName}`
     );
     //validate if the request dont throw an error
