@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import SQLiteRepository from "./context/pokemon/infrastructure/persistence/SQLite/DBRepository";
 import PokemonService from "./context/pokemon/application/PokemonService";
 import PokemonController from "./context/pokemon/infrastructure/express/PokemonController";
+import routeCache from "route-cache";
 
 dotenv.config();
 
@@ -36,6 +37,7 @@ if (process.env.NODE_ENV === "development") {
   );
   app.get(
     "/api/v1/pokedex",
+    routeCache.cacheSeconds(60),
     pokemonController.obtainPokedex.bind(pokemonController)
   );
 }
