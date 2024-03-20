@@ -14,7 +14,7 @@ WORKDIR /opt/app
 COPY . .
 RUN chown -R node:node /opt/app
 USER node
-RUN cd src/context/pokemon/infrastructure/persistence/SQLite/ && npx prisma migrate deploy
+RUN cd src/context/pokemon/infrastructure/persistence/SQLite/ && npx prisma migrate dev --name init
 RUN npm run build
 
 EXPOSE 3001
