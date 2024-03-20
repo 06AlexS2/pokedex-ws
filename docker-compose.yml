@@ -11,8 +11,7 @@ services:
       - ./package.json:/opt/package.json
       - ./.env:/opt/app/.env
     environment:
-      - NODE_ENV=production
-    # Aquí montamos el archivo .env como una variable de entorno
+      - NODE_ENV=development
     env_file:
       - .env
   tests:
