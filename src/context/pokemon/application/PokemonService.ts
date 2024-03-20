@@ -26,11 +26,11 @@ export default class PokemonService {
     );
     //validate if the request dont throw an error
     if (response.status !== 200) {
-      return Promise.reject("Not a valid pokemon");
+      return Promise.reject(new Error("Not a valid pokemon"));
     }
     const pokemonData = await response.json();
     if (!pokemonData) {
-      return Promise.reject("Pokemon not found");
+      return Promise.reject(new Error("Pokemon not found"));
     }
     const id = new Id(pokemonData.id);
     const name = new Name(pokemonData.name);
@@ -38,7 +38,7 @@ export default class PokemonService {
       const typeId = new Id(Number.parseInt(type.type.url.split("/")[6]));
       const typeName = new Name(type.type.name);
       if (!typeId || !typeName) {
-        return Promise.reject("Error fetching the pokemon types");
+        return Promise.reject(new Error("Error fetching the pokemon types"));
       }
       return new PokemonType(typeName, typeId);
     });
@@ -47,7 +47,7 @@ export default class PokemonService {
       const move = pokemonData.moves[i];
       const moveInfo = await fetch(move.move.url);
       if (!moveInfo) {
-        return Promise.reject("Error fetching the move info");
+        return Promise.reject(new Error("Error fetching the move info"));
       }
       const moveData = await moveInfo.json(); // Extract JSON data from the response
       const moveId = new Id(moveData.id); // Access the 'id' property from the moveData
@@ -60,7 +60,7 @@ export default class PokemonService {
       );
       const moveTypeName = new Name(moveData.type.name);
       if (!moveTypeId || !moveTypeName) {
-        return Promise.reject("Error fetching the movement types");
+        return Promise.reject(new Error("Error fetching the movement types"));
       }
       const moveElementType = new PokemonType(moveTypeName, moveTypeId);
       const moveAccuracy = new MoveAccuracy(moveData.accuracy);
