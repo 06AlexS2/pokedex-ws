@@ -23,7 +23,7 @@ export default class PokemonService {
   async fetchPokemonFromAPI(pokeName: string): Promise<Pokemon> {
     const response = await cacheFetch(
       `https://pokeapi.co/api/v2/pokemon/${pokeName}`
-    );
+    ).catch((error) => {return Promise.reject(error)});
     //validate if the request dont throw an error
     if (response.status !== 200) {
       return Promise.reject(new Error("Not a valid pokemon"));
