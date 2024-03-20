@@ -21,7 +21,7 @@ export default class PokemonService {
   constructor(private pokemonRepository: PokemonRepository) {}
 
   async fetchPokemonFromAPI(pokeName: string): Promise<Pokemon> {
-    const response = await cacheFetch(
+    const response = await fetch(
       `https://pokeapi.co/api/v2/pokemon/${pokeName}`
     );
     //validate if the request dont throw an error
